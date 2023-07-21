@@ -1,12 +1,13 @@
 import requests
 import time
-# from parsel import Selector
+from parsel import Selector
 
-# Requisito 1
+
 def fetch(url):
     try:
         time.sleep(1)
-        result = requests.get(url, headers={ "user-agent": "Fake user-agent" }, timeout=3)
+        result = requests.get(url, headers={
+            "user-agent": "Fake user-agent"}, timeout=3)
         if result.status_code == 200:
             return result.text
         else:
@@ -14,10 +15,12 @@ def fetch(url):
     except requests.ReadTimeout:
         return None
 
+
 # Requisito 2
 def scrape_updates(html_content):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    selector = Selector(text=html_content)
+    list_links = selector.css('.cs-overlay a::attr(href)').getall()
+    return list_links
 
 
 # Requisito 3
