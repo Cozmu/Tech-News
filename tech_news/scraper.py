@@ -1,8 +1,18 @@
+import requests
+import time
+# from parsel import Selector
+
 # Requisito 1
 def fetch(url):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
-
+    try:
+        time.sleep(1)
+        result = requests.get(url, headers={ "user-agent": "Fake user-agent" }, timeout=3)
+        if result.status_code == 200:
+            return result.text
+        else:
+            return None
+    except requests.ReadTimeout:
+        return None
 
 # Requisito 2
 def scrape_updates(html_content):
