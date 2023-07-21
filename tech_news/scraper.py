@@ -16,17 +16,16 @@ def fetch(url):
         return None
 
 
-# Requisito 2
 def scrape_updates(html_content):
     selector = Selector(text=html_content)
     list_links = selector.css('.cs-overlay a::attr(href)').getall()
     return list_links
 
 
-# Requisito 3
 def scrape_next_page_link(html_content):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    selector = Selector(text=html_content)
+    next_link = selector.css('.nav-links .next::attr(href)').get()
+    return next_link
 
 
 # Requisito 4
