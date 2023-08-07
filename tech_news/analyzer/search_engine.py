@@ -1,7 +1,9 @@
-# Requisito 7
+from tech_news.database import search_news
+
+
 def search_by_title(title):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    result = search_news({"title": {"$regex": title, "$options": "i"}})
+    return [(news["title"], news["url"]) for news in result]
 
 
 # Requisito 8
@@ -10,7 +12,6 @@ def search_by_date(date):
     raise NotImplementedError
 
 
-# Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    result = search_news({"category": {"$regex": category, "$options": "i"}})
+    return [(news["title"], news["url"]) for news in result]
